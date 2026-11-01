@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OpenShelf: Free Learning for Everyone</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#1d2330;--mute:#5d6678;--line:#e4e0d8;--acc:#1f6f5c;--accbg:#e2f1ec;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181f;--card:#1c222c;--ink:#eceff4;--mute:#a1aab9;--line:#2c3441;--acc:#5fd0b0;--accbg:#1d3a33;--on:#0c1a16;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14181f;--card:#1c222c;--ink:#eceff4;--mute:#a1aab9;--line:#2c3441;--acc:#5fd0b0;--accbg:#1d3a33;--on:#0c1a16;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+header{padding:44px 0 22px}
+.logo{font-weight:700;letter-spacing:.02em;color:var(--acc)}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;margin:.35em 0 .3em;max-width:18ch}
+.sub{color:var(--mute);max-width:60ch;margin:0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.badge{background:var(--accbg);color:var(--acc);border-radius:99px;padding:4px 12px;font-size:.85rem;font-weight:600}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 12px}
+input[type=search],input[type=text],input[type=url],select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+input[type=search]{flex:1;min-width:200px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{font:inherit;font-size:.9rem;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 14px}
+.chip[aria-pressed=true]{background:var(--acc);color:var(--on);border-color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--acc)}
+.card h3{margin:0;font-size:1.05rem}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{text-decoration:underline}
+.card p{margin:0;color:var(--mute);font-size:.93rem;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.vote{font:inherit;cursor:pointer;display:flex;gap:6px;align-items:center;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+.vote[aria-pressed=true]{background:var(--accbg);color:var(--acc);border-color:var(--acc)}
+.tag{font-size:.8rem;color:var(--mute)}
+.empty{color:var(--mute);padding:30px 0;text-align:center}
+section.suggest{margin:40px 0 20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+section.suggest h2{margin:0 0 4px;font-size:1.2rem}
+form{display:grid;gap:10px;margin-top:12px}
+@media(min-width:640px){form{grid-template-columns:1fr 1fr}form .full{grid-column:1/-1}}
+button.go{font:inherit;font-weight:600;cursor:pointer;background:var(--acc);color:var(--on);border:0;border-radius:10px;padding:10px 16px;justify-self:start}
+.note{font-size:.85rem;color:var(--mute)}
+footer{padding:20px 0 40px;color:var(--mute);font-size:.88rem;border-top:1px solid var(--line);margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="logo">OpenShelf</div>
+<h1>Free learning, shelved for everyone.</h1>
+<p class="sub">A community-curated hub of free, high-quality learning resources. Browse by topic, upvote what helped you, and suggest what is missing.</p>
+<div class="badges"><span class="badge">UN SDG 4: Quality Education</span><span class="badge">UN SDG 10: Reduced Inequalities</span></div>
+</header>
+
+<div class="controls">
+<input type="search" id="q" placeholder="Search resources…" aria-label="Search resources">
+<select id="sort" aria-label="Sort"><option value="votes">Most upvoted</option><option value="az">A to Z</option></select>
+</div>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" hidden>No resources match your search yet. Try suggesting one below.</div>
+
+<section class="suggest">
+<h2>Request or suggest a resource</h2>
+<p class="note">Know a free resource that should be here? Add it below. In this prototype, suggestions are saved in your own browser only.</p>
+<form id="f">
+<input type="text" id="fn" placeholder="Resource name" required>
+<input type="url" id="fu" placeholder="https://link-to-resource" required>
+<select id="fc" aria-label="Category"></select>
+<input type="text" id="fd" placeholder="One-line description" required>
+<button class="go full" type="submit">Add to OpenShelf</button>
+</form>
+</section>
+
+<footer>OpenShelf is a student project prototype built for UN Sustainable Development Goals 4 and 10. Resource links lead to external sites.</footer>
+</div>
+
+<script>
+var CATS=["Academics","Tech & Programming","Body & Mind","Money & Systems","World & Society","Media & Digital Literacy"];
+var BASE=[
+["Khan Academy","https://www.khanacademy.org","Academics","Free lessons and practice in math, science, and more, from basics to college level."],
+["MIT OpenCourseWare","https://ocw.mit.edu","Academics","Lecture notes, problem sets, and videos from real MIT courses."],
+["PhET Simulations","https://phet.colorado.edu","Academics","Interactive physics, chemistry, and math simulations you can play with."],
+["CS50","https://cs50.harvard.edu","Tech & Programming","Harvard’s introduction to computer science, free online."],
+["freeCodeCamp","https://www.freecodecamp.org","Tech & Programming","Learn web development and programming through hands-on projects."],
+["The Odin Project","https://www.theodinproject.com","Tech & Programming","A free full-stack web development curriculum."],
+["NHS Live Well","https://www.nhs.uk/live-well/","Body & Mind","Practical, evidence-based guidance on fitness, sleep, and mental wellbeing."],
+["Crash Course","https://thecrashcourse.com","Body & Mind","Short, clear video courses including psychology and anatomy."],
+["Khan Academy: Economics & Finance","https://www.khanacademy.org/economics-finance-domain","Money & Systems","Core ideas on money, banking, and how economies work."],
+["Y Combinator Startup School","https://www.startupschool.org","Money & Systems","Free course and community for people starting a company."],
+["Our World in Data","https://ourworldindata.org","World & Society","Charts and research on global issues, with open data."],
+["UN SDG Hub","https://sdgs.un.org","World & Society","Background on all 17 Sustainable Development Goals."],
+["Civic Online Reasoning","https://cor.inquiry.ed.stanford.edu","Media & Digital Literacy","Stanford lessons for judging what you find online."],
+["Google Fact Check Explorer","https://toolbox.google.com/factcheck/explorer","Media & Digital Literacy","Search fact-checks from publishers around the world."]
+];
+var cat="All",KEY="openshelf_v1";
+var S={votes:{},mine:[]};
+try{var raw=localStorage.getItem(KEY);if(raw)S=JSON.parse(raw)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function all(){return BASE.concat(S.mine||[])}
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function seed(n){var h=0;for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))%17;return h+3}
+function count(r){return seed(r[0])+(S.votes[r[0]]?1:0)}
+function chips(){
+var h=["All"].concat(CATS).map(function(c){return '<button class="chip" aria-pressed="'+(c===cat)+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
+document.getElementById("chips").innerHTML=h;
+}
+function render(){
+var q=document.getElementById("q").value.toLowerCase().trim();
+var list=all().filter(function(r){return(cat==="All"||r[2]===cat)&&(r[0]+" "+r[3]).toLowerCase().indexOf(q)>-1});
+if(document.getElementById("sort").value==="az")list.sort(function(a,b){return a[0].localeCompare(b[0])});
+else list.sort(function(a,b){return count(b)-count(a)});
+document.getElementById("grid").innerHTML=list.map(function(r){
+var on=!!S.votes[r[0]];
+return '<article class="card"><span class="cat">'+esc(r[2])+'</span><h3><a href="'+esc(r[1])+'" target="_blank" rel="noopener noreferrer">'+esc(r[0])+'</a></h3><p>'+esc(r[3])+'</p><div class="row"><button class="vote" aria-pressed="'+on+'" data-n="'+esc(r[0])+'">▲ '+count(r)+'</button><span class="tag">Free</span></div></article>';
+}).join("");
+document.getElementById("empty").hidden=list.length>0;
+}
+document.getElementById("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;cat=b.getAttribute("data-c");chips();render()});
+document.getElementById("grid").addEventListener("click",function(e){var b=e.target.closest(".vote");if(!b)return;var n=b.getAttribute("data-n");if(S.votes[n])delete S.votes[n];else S.votes[n]=1;save();render()});
+document.getElementById("q").addEventListener("input",render);
+document.getElementById("sort").addEventListener("change",render);
+document.getElementById("fc").innerHTML=CATS.map(function(c){return "<option>"+esc(c)+"</option>"}).join("");
+document.getElementById("f").addEventListener("submit",function(e){
+e.preventDefault();
+var u=document.getElementById("fu").value.trim();
+if(!/^https?:\/\//i.test(u))return;
+S.mine=S.mine||[];
+S.mine.push([document.getElementById("fn").value.trim(),u,document.getElementById("fc").value,document.getElementById("fd").value.trim()]);
+save();e.target.reset();cat="All";chips();render();
+window.scrollTo({top:0,behavior:"smooth"});
+});
+chips();render();
+</script>
+</body>
+</html>
