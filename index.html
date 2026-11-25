@@ -2,138 +2,203 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OpenShelf: Free Learning for Everyone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenShelf – free learning, from junior high to PhD</title>
+<meta name="description" content="A free library of learning resources sorted by level and topic. No account, your progress stays on your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#faf8f4;--card:#fff;--ink:#1d2330;--mute:#5d6678;--line:#e4e0d8;--acc:#1f6f5c;--accbg:#e2f1ec;--on:#fff;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181f;--card:#1c222c;--ink:#eceff4;--mute:#a1aab9;--line:#2c3441;--acc:#5fd0b0;--accbg:#1d3a33;--on:#0c1a16;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#14181f;--card:#1c222c;--ink:#eceff4;--mute:#a1aab9;--line:#2c3441;--acc:#5fd0b0;--accbg:#1d3a33;--on:#0c1a16;color-scheme:dark}
-*{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:980px;margin:0 auto;padding:0 18px}
-header{padding:44px 0 22px}
-.logo{font-weight:700;letter-spacing:.02em;color:var(--acc)}
-h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;margin:.35em 0 .3em;max-width:18ch}
-.sub{color:var(--mute);max-width:60ch;margin:0}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.badge{background:var(--accbg);color:var(--acc);border-radius:99px;padding:4px 12px;font-size:.85rem;font-weight:600}
-.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 12px}
-input[type=search],input[type=text],input[type=url],select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
-input[type=search]{flex:1;min-width:200px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-.chip{font:inherit;font-size:.9rem;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 14px}
-.chip[aria-pressed=true]{background:var(--acc);color:var(--on);border-color:var(--acc)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
-.cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--acc)}
-.card h3{margin:0;font-size:1.05rem}
-.card h3 a{color:inherit;text-decoration:none}
-.card h3 a:hover{text-decoration:underline}
-.card p{margin:0;color:var(--mute);font-size:.93rem;flex:1}
-.row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
-.vote{font:inherit;cursor:pointer;display:flex;gap:6px;align-items:center;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:4px 12px}
-.vote[aria-pressed=true]{background:var(--accbg);color:var(--acc);border-color:var(--acc)}
-.tag{font-size:.8rem;color:var(--mute)}
-.empty{color:var(--mute);padding:30px 0;text-align:center}
-section.suggest{margin:40px 0 20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
-section.suggest h2{margin:0 0 4px;font-size:1.2rem}
-form{display:grid;gap:10px;margin-top:12px}
-@media(min-width:640px){form{grid-template-columns:1fr 1fr}form .full{grid-column:1/-1}}
-button.go{font:inherit;font-weight:600;cursor:pointer;background:var(--acc);color:var(--on);border:0;border-radius:10px;padding:10px 16px;justify-self:start}
-.note{font-size:.85rem;color:var(--mute)}
-footer{padding:20px 0 40px;color:var(--mute);font-size:.88rem;border-top:1px solid var(--line);margin-top:30px}
+:root{--bg:#faf9f6;--card:#fff;--ink:#1c2420;--mute:#5d6a63;--line:#e4e2da;--g:#2b5942;--gl:#e3eee7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif}
+a{color:inherit}:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+em{font-family:"Instrument Serif",serif;font-weight:400;color:var(--g);letter-spacing:0}
+.mono{font:500 .78rem "JetBrains Mono",monospace;color:var(--mute)}
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(250,249,246,.92);backdrop-filter:blur(8px);z-index:5}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;text-decoration:none}
+.logo b{width:30px;height:30px;border-radius:8px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:.9rem}
+.tabs{display:flex;gap:4px}.tabs a{padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--mute);font-weight:500;font-size:.95rem}
+.tabs a[aria-current]{background:#ecebe4;color:var(--ink)}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;border:1px solid var(--ink);cursor:pointer;font:600 .95rem inherit;font-family:inherit}
+.btn.o{background:var(--card);color:var(--ink);border-color:var(--line)}
+.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;padding:64px 0 40px}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.6rem)}
+.hero p.lead{font-size:1.15rem;color:var(--mute);max-width:46ch;margin:20px 0 28px}
+.pill{display:inline-block;background:var(--gl);color:var(--g);border-radius:999px;padding:4px 12px;margin-bottom:18px}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.tilt{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;transform:rotate(2.2deg);box-shadow:0 30px 60px -30px rgba(28,36,32,.25)}
+.bar{height:8px;border-radius:9px;background:#ecebe4;overflow:hidden}.bar i{display:block;height:100%;background:var(--g);width:0;transition:width .4s}
+.tilt h3{font-size:1.5rem;margin:6px 0 14px}
+.mini{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:.95rem}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid #c9c7bd;flex:none}.dot.on{background:var(--g);border-color:var(--g)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 0 56px;border-top:1px solid var(--line)}
+.facts b{display:block;font-size:2.3rem;letter-spacing:-.04em}
+.facts p{margin:4px 0 0;color:var(--mute);font-size:.92rem}
+.sec{padding:36px 0}.sec h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:6px}.sec>p{color:var(--mute);margin:0 0 22px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+.tile:hover{border-color:var(--g);transform:translateY(-3px)}
+.tile h3{font-size:1.15rem}.tile .bar{margin-top:auto}
+.crumb{padding:30px 0 6px}.crumb h1{font-size:clamp(2.2rem,5vw,3.4rem)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;cursor:pointer;font:500 .88rem inherit;font-family:inherit;color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--g);border-color:var(--g);color:#fff}
+ul.rows{list-style:none;margin:0;padding:0 0 50px;display:grid;gap:10px}
+.row{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.chk{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid #c9c7bd;background:none;cursor:pointer;color:#fff;font-size:.85rem;margin-top:2px}
+.chk[aria-pressed=true]{background:var(--g);border-color:var(--g)}
+.row .t{font-weight:700;text-decoration:none}.row .t:hover{text-decoration:underline}
+.row p{margin:2px 0 6px;color:var(--mute);font-size:.93rem}
+.row .go{margin-left:auto;font-size:.88rem;font-weight:600;white-space:nowrap;color:var(--g)}
+.tag{display:inline-block;margin-right:8px}
+.pp{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.pp div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+textarea{width:100%;min-height:80px;border:1px solid var(--line);border-radius:12px;padding:12px;font:.8rem "JetBrains Mono",monospace;background:var(--card);color:var(--ink)}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mute);font-size:.88rem}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:36px}.tilt{transform:none}.facts{grid-template-columns:1fr}.tabs a{padding:8px 9px}.nav .btn{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-<div class="logo">OpenShelf</div>
-<h1>Free learning, shelved for everyone.</h1>
-<p class="sub">A community-curated hub of free, high-quality learning resources. Browse by topic, upvote what helped you, and suggest what is missing.</p>
-<div class="badges"><span class="badge">UN SDG 4: Quality Education</span><span class="badge">UN SDG 10: Reduced Inequalities</span></div>
-</header>
-
-<div class="controls">
-<input type="search" id="q" placeholder="Search resources…" aria-label="Search resources">
-<select id="sort" aria-label="Sort"><option value="votes">Most upvoted</option><option value="az">A to Z</option></select>
-</div>
-<div class="chips" id="chips"></div>
-<div class="grid" id="grid"></div>
-<div class="empty" id="empty" hidden>No resources match your search yet. Try suggesting one below.</div>
-
-<section class="suggest">
-<h2>Request or suggest a resource</h2>
-<p class="note">Know a free resource that should be here? Add it below. In this prototype, suggestions are saved in your own browser only.</p>
-<form id="f">
-<input type="text" id="fn" placeholder="Resource name" required>
-<input type="url" id="fu" placeholder="https://link-to-resource" required>
-<select id="fc" aria-label="Category"></select>
-<input type="text" id="fd" placeholder="One-line description" required>
-<button class="go full" type="submit">Add to OpenShelf</button>
-</form>
-</section>
-
-<footer>OpenShelf is a student project prototype built for UN Sustainable Development Goals 4 and 10. Resource links lead to external sites.</footer>
-</div>
-
+<header><div class="w nav"><a class="logo" href="#/"><b>O</b>OpenShelf</a>
+<nav class="tabs" id="tabs"><a href="#/" data-k="home">Home</a><a href="#/explore" data-k="explore">Explore</a><a href="#/progress" data-k="progress">My progress</a></nav>
+<a class="btn" href="#/explore">Start learning</a></div></header>
+<main class="w" id="app"></main>
+<footer><div class="w">OpenShelf supports UN Sustainable Development Goals 4 (quality education) and 10 (reduced inequalities). Resources belong to their creators; check each site for its terms. Sources: ITU Facts and Figures 2025; UNESCO GEM Report 2026; UTSA OER survey 2024–25.</div></footer>
 <script>
-var CATS=["Academics","Tech & Programming","Body & Mind","Money & Systems","World & Society","Media & Digital Literacy"];
-var BASE=[
-["Khan Academy","https://www.khanacademy.org","Academics","Free lessons and practice in math, science, and more, from basics to college level."],
-["MIT OpenCourseWare","https://ocw.mit.edu","Academics","Lecture notes, problem sets, and videos from real MIT courses."],
-["PhET Simulations","https://phet.colorado.edu","Academics","Interactive physics, chemistry, and math simulations you can play with."],
-["CS50","https://cs50.harvard.edu","Tech & Programming","Harvard’s introduction to computer science, free online."],
-["freeCodeCamp","https://www.freecodecamp.org","Tech & Programming","Learn web development and programming through hands-on projects."],
-["The Odin Project","https://www.theodinproject.com","Tech & Programming","A free full-stack web development curriculum."],
-["NHS Live Well","https://www.nhs.uk/live-well/","Body & Mind","Practical, evidence-based guidance on fitness, sleep, and mental wellbeing."],
-["Crash Course","https://thecrashcourse.com","Body & Mind","Short, clear video courses including psychology and anatomy."],
-["Khan Academy: Economics & Finance","https://www.khanacademy.org/economics-finance-domain","Money & Systems","Core ideas on money, banking, and how economies work."],
-["Y Combinator Startup School","https://www.startupschool.org","Money & Systems","Free course and community for people starting a company."],
-["Our World in Data","https://ourworldindata.org","World & Society","Charts and research on global issues, with open data."],
-["UN SDG Hub","https://sdgs.un.org","World & Society","Background on all 17 Sustainable Development Goals."],
-["Civic Online Reasoning","https://cor.inquiry.ed.stanford.edu","Media & Digital Literacy","Stanford lessons for judging what you find online."],
-["Google Fact Check Explorer","https://toolbox.google.com/factcheck/explorer","Media & Digital Literacy","Search fact-checks from publishers around the world."]
-];
-var cat="All",KEY="openshelf_v1";
-var S={votes:{},mine:[]};
-try{var raw=localStorage.getItem(KEY);if(raw)S=JSON.parse(raw)}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-function all(){return BASE.concat(S.mine||[])}
-function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
-function seed(n){var h=0;for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))%17;return h+3}
-function count(r){return seed(r[0])+(S.votes[r[0]]?1:0)}
-function chips(){
-var h=["All"].concat(CATS).map(function(c){return '<button class="chip" aria-pressed="'+(c===cat)+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
-document.getElementById("chips").innerHTML=h;
+var L=[["jh","Junior high"],["hs","High school"],["ug","Undergraduate"],["ms","Master’s"],["phd","PhD"]];
+var T=[["math","Mathematics"],["physics","Physics"],["chem","Chemistry"],["tech","Tech & programming"],["mind","Body & mind"],["money","Money & business"],["world","World & society"],["media","Media & digital literacy"]];
+// name, url, topic, levels, description
+var D=[
+["Khan Academy","https://www.khanacademy.org","math","jh,hs","Free lessons and practice from basic maths to calculus."],
+["MathMania","https://github.com/Garvitjoshi1/MathMania","math","jh,hs","Interactive visual maths lab, from fractions to integrals."],
+["Natural Number Game","https://github.com/leanprover-community/nng4","math","hs,ug","Learn formal proofs by playing a browser puzzle game."],
+["Calculus with Python (freeCodeCamp)","https://www.freecodecamp.org/news/learn-college-calculus-and-implement-with-python/","math","ug","College calculus explained and coded in Python."],
+["MIT OpenCourseWare","https://ocw.mit.edu","math","ug,ms","Real MIT course notes, problem sets and lectures."],
+["Mathlib4 (Lean 4)","https://github.com/leanprover-community/mathlib4","math","ms,phd","The community library for formal mathematics."],
+["PhysicsHub","https://physicshub.github.io/","physics","jh,hs","Free, no-login simulations of forces, energy and motion."],
+["myPhysicsLab","https://github.com/myphysicslab/myphysicslab","physics","hs,ug","About 50 real-time physics simulations with the maths explained."],
+["NASA Open Science Training","https://science.nasa.gov/open-science/training/","physics","ug,ms","Free training on open science and working with NASA data."],
+["QuTiP Tutorials","https://github.com/qutip/qutip-tutorials","physics","ms,phd","Python tutorials for simulating quantum systems."],
+["Robotics Coursework","https://github.com/mithi/robotics-coursework","physics","ug,ms","A collected path through robotics and kinematics courses."],
+["MolView 3D Tutorial","https://oercommons.org/courseware/lesson/80685","chem","jh,hs","Draw a molecule in 2D and see it in 3D."],
+["Molecule Visualiser","https://atoms-molecule-visualiser.streamlit.app/","chem","hs,ug","Turn SMILES text into 2D and 3D molecule models."],
+["LibreTexts Chemistry","https://libretexts.org","chem","hs,ug","Free online chemistry textbooks, including OpenStax."],
+["Otterbein Symmetry","https://symotter.org/","chem","ug,ms","Interactive point groups, 120+ molecules and crystal structures."],
+["Awesome Python Chemistry","https://github.com/lmmentel/awesome-python-chemistry","chem","ms,phd","Curated tools for computational chemistry in Python."],
+["Algorithm Visualizer","https://algorithm-visualizer.org","tech","hs,ug","Watch algorithms run step by step next to the code."],
+["Byte-Sized Algorithms","https://byte-sized-algorithms.vercel.app/#/big-o/1","tech","hs,ug","Short lessons on Big O and core algorithms."],
+["NandGame","https://nandgame.com","tech","jh,hs","Build a computer from scratch, starting with one switch."],
+["CS50","https://cs50.harvard.edu/x","tech","hs,ug","Harvard’s intro to computer science, free online."],
+["freeCodeCamp","https://www.freecodecamp.org","tech","hs,ug","Free web development, Python and data projects."],
+["Elements of AI","https://course.elementsofai.com/","tech","hs,ug","A friendly, non-technical introduction to AI."],
+["Project-Based Learning","https://github.com/practical-tutorials/project-based-learning","tech","ug","Programming tutorials where you build real projects."],
+["Python Code Tutorials","https://github.com/x4nth055/pythoncode-tutorials","tech","ug","Hundreds of practical Python tutorials with code."],
+["Python Interview Questions","https://github.com/yakimka/python_interview_questions/blob/master/questions.md","tech","ug","Common Python interview questions to practise."],
+["Nand2Tetris","https://www.nand2tetris.org/demos","tech","ug,ms","Build a working computer from logic gates to software."],
+["End-to-End Machine Learning (freeCodeCamp)","https://www.freecodecamp.org/news/end-to-end-machine-learning-course-project/","tech","ug,ms","A full machine learning project from data to deployment."],
+["Information Security (freeCodeCamp)","https://www.freecodecamp.org/learn/information-security/","tech","ug","Hands-on certification path in information security."],
+["Introduction to Cybersecurity (Cisco)","https://www.netacad.com/courses/introduction-to-cybersecurity?courseLang=en-US","tech","hs,ug","Beginner cybersecurity course from Cisco Networking Academy."],
+["Cybersecurity (ADBI e-learning)","https://elearning-adbi.org/courses/cybersecurity/","tech","ug","Online cybersecurity course from ADBI."],
+["Google Cloud Skills Boost Path","https://www.skills.google/paths/118","tech","ug","Guided learning path with labs. Some content may need an account."],
+["Huawei Talent Learning","https://e.huawei.com/en/talent/learning/#/home","tech","ug","Free courses on networking, cloud and ICT."],
+["PsyToolkit Stroop Task","https://www.psytoolkit.org/library/experiment_stroop_en.html","mind","jh,hs","Run a classic psychology experiment in your browser."],
+["NHS Every Mind Matters","https://www.nhs.uk/every-mind-matters/","mind","jh,hs,ug","Trusted tips for looking after your mental health."],
+["NHS Live Well: Exercise","https://www.nhs.uk/live-well/exercise/","mind","jh,hs,ug","Beginner fitness guides for every age."],
+["Scarleteen","https://www.scarleteen.com","mind","hs,ug","Inclusive sex and relationships education."],
+["Awesome Neuropsychology","https://github.com/pomodoren/awesome-neuropsychology","mind","ug,ms,phd","Experiment builders, brain datasets and analysis tools."],
+["Khan Academy: Economics & Finance","https://www.khanacademy.org/economics-finance-domain","money","jh,hs","Money, banking and economics from the basics."],
+["CORE Econ","https://www.core-econ.org","money","hs,ug","Modern open-access economics textbooks."],
+["Y Combinator Startup School","https://www.startupschool.org","money","ug","Free course for people starting a company."],
+["FRED Economic Data","https://fred.stlouisfed.org","money","ug,ms","Interest rates, inflation and GDP data from the US Fed."],
+["QuantEcon","https://quantecon.org","money","ms,phd","Computational economics in Python and Julia."],
+["Our World in Data","https://ourworldindata.org","world","hs,ug","Charts on poverty, health, energy and education."],
+["CFR Backgrounders","https://www.cfr.org/backgrounders","world","hs,ug","Short explainers on geopolitics and conflicts."],
+["ACLED on HDX","https://data.humdata.org/organization/activity/acled","world","ug,ms,phd","Real-time armed conflict event data."],
+["Bad News Game","https://www.getbadnews.com","media","jh,hs","A 20-minute game that teaches how fake news is made."],
+["News Literacy Project","https://newslit.org","media","jh,hs","Free tools to spot misinformation."],
+["EFF Surveillance Self-Defense","https://ssd.eff.org","media","hs,ug","Practical guides to staying private online."],
+["Awesome Privacy","https://awesome-privacy.xyz","media","hs,ug,ms","A searchable list of privacy-respecting tools."]
+].map(function(r){var h=0,i;for(i=0;i<r[1].length;i++)h=(h*31+r[1].charCodeAt(i))|0;return{id:(h>>>0).toString(36),n:r[0],u:r[1],t:r[2],l:r[3].split(","),d:r[4]}});
+var done={};try{done=JSON.parse(localStorage.getItem("os_done")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("os_done",JSON.stringify(done))}catch(e){}}
+function nm(a,k){return a.filter(function(x){return x[0]===k})[0][1]}
+function esc(s){return s.replace(/[&<>"]/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]})}
+function stat(list){var d=list.filter(function(r){return done[r.id]}).length;return{d:d,n:list.length,p:list.length?Math.round(d/list.length*100):0}}
+function bar(p){return '<div class="bar"><i style="width:'+p+'%"></i></div>'}
+var app=document.getElementById("app"),second="all";
+
+function home(){
+ var s=stat(D),nxt=D.filter(function(r){return!done[r.id]}).slice(0,3);
+ return '<section class="hero"><div><span class="pill mono">Free resources · No account · Works offline-first</span>'+
+ '<h1>Learning belongs on an <em>open shelf.</em></h1><p class="lead">OpenShelf collects free courses, simulations and guides from junior high to PhD, so you can find the right one without searching the whole internet.</p>'+
+ '<div class="acts"><a class="btn" href="#/explore">Explore the library →</a><a class="btn o" href="#how">See how it works</a></div>'+
+ '<p class="mono" style="margin-top:18px">No account. No cloud. Your progress stays in this browser.</p></div>'+
+ '<div class="tilt"><div class="mono">Your progress</div><h3>'+s.p+'% of the shelf done</h3>'+bar(s.p)+
+ '<div style="margin-top:14px">'+nxt.map(function(r){return'<div class="mini"><span class="dot"></span>'+esc(r.n)+'</div>'}).join("")+'</div></div></section>'+
+ '<section class="facts"><div><b>2.2 billion</b><p>people were still offline in 2025, mostly in low and middle income countries (ITU).</p></div>'+
+ '<div><b>273 million</b><p>children and young people were out of school in 2024 (UNESCO).</p></div>'+
+ '<div><b>85%</b><p>of surveyed students at one US university had never heard of open educational resources (UTSA).</p></div></section>'+
+ '<section class="sec" id="how"><h2>How it <em>works</em></h2><p>Three steps, no sign-up.</p><div class="g">'+
+ '<div class="tile"><h3>1. Pick a level</h3><span>Junior high, high school, undergraduate, master’s or PhD.</span></div>'+
+ '<div class="tile"><h3>2. Choose a resource</h3><span>Every resource is free to start and sorted by topic.</span></div>'+
+ '<div class="tile"><h3>3. Tick it off</h3><span>Progress saves in your browser. Back it up with a code to use on another device.</span></div></div></section>';
 }
-function render(){
-var q=document.getElementById("q").value.toLowerCase().trim();
-var list=all().filter(function(r){return(cat==="All"||r[2]===cat)&&(r[0]+" "+r[3]).toLowerCase().indexOf(q)>-1});
-if(document.getElementById("sort").value==="az")list.sort(function(a,b){return a[0].localeCompare(b[0])});
-else list.sort(function(a,b){return count(b)-count(a)});
-document.getElementById("grid").innerHTML=list.map(function(r){
-var on=!!S.votes[r[0]];
-return '<article class="card"><span class="cat">'+esc(r[2])+'</span><h3><a href="'+esc(r[1])+'" target="_blank" rel="noopener noreferrer">'+esc(r[0])+'</a></h3><p>'+esc(r[3])+'</p><div class="row"><button class="vote" aria-pressed="'+on+'" data-n="'+esc(r[0])+'">▲ '+count(r)+'</button><span class="tag">Free</span></div></article>';
-}).join("");
-document.getElementById("empty").hidden=list.length>0;
+function explore(){
+ return '<section class="sec"><h2>Start with your <em>level.</em></h2><p>Studying advanced algebra? Go straight to Undergraduate and find it there.</p><div class="g">'+
+ L.map(function(l){var s=stat(D.filter(function(r){return r.l.indexOf(l[0])>-1}));return'<a class="tile" href="#/level/'+l[0]+'"><span class="mono">'+s.n+' resources</span><h3>'+l[1]+'</h3>'+bar(s.p)+'</a>'}).join("")+'</div></section>'+
+ '<section class="sec"><h2>Or browse by <em>topic.</em></h2><p>See every level of one subject together.</p><div class="g">'+
+ T.map(function(t){var s=stat(D.filter(function(r){return r.t===t[0]}));return'<a class="tile" href="#/topic/'+t[0]+'"><span class="mono">'+s.n+' resources</span><h3>'+t[1]+'</h3>'+bar(s.p)+'</a>'}).join("")+'</div></section>';
 }
-document.getElementById("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;cat=b.getAttribute("data-c");chips();render()});
-document.getElementById("grid").addEventListener("click",function(e){var b=e.target.closest(".vote");if(!b)return;var n=b.getAttribute("data-n");if(S.votes[n])delete S.votes[n];else S.votes[n]=1;save();render()});
-document.getElementById("q").addEventListener("input",render);
-document.getElementById("sort").addEventListener("change",render);
-document.getElementById("fc").innerHTML=CATS.map(function(c){return "<option>"+esc(c)+"</option>"}).join("");
-document.getElementById("f").addEventListener("submit",function(e){
-e.preventDefault();
-var u=document.getElementById("fu").value.trim();
-if(!/^https?:\/\//i.test(u))return;
-S.mine=S.mine||[];
-S.mine.push([document.getElementById("fn").value.trim(),u,document.getElementById("fc").value,document.getElementById("fd").value.trim()]);
-save();e.target.reset();cat="All";chips();render();
-window.scrollTo({top:0,behavior:"smooth"});
+function list(kind,key){
+ var base=D.filter(function(r){return kind==="level"?r.l.indexOf(key)>-1:r.t===key}),other=kind==="level"?T:L,list=base;
+ if(second!=="all")list=base.filter(function(r){return kind==="level"?r.t===second:r.l.indexOf(second)>-1});
+ var s=stat(base),title=nm(kind==="level"?L:T,key);
+ return '<section class="crumb"><a class="mono" href="#/explore">← All levels and topics</a><h1 style="margin-top:10px">'+title+'</h1><p class="mono">'+s.d+' of '+s.n+' done</p>'+bar(s.p)+
+ '<div class="chips" role="group" aria-label="Filter">'+[["all",kind==="level"?"All topics":"All levels"]].concat(other).map(function(o){return'<button class="chip" data-f="'+o[0]+'" aria-pressed="'+(second===o[0])+'">'+o[1]+'</button>'}).join("")+'</div></section>'+
+ '<ul class="rows">'+(list.length?list.map(row).join(""):'<li class="mono">Nothing here yet. More resources are added regularly.</li>')+'</ul>';
+}
+function row(r){
+ var on=!!done[r.id];
+ return '<li class="row"><button class="chk" data-id="'+r.id+'" aria-pressed="'+on+'" aria-label="Mark '+esc(r.n)+' as done">'+(on?"✓":"")+'</button><div><a class="t" href="'+r.u+'" target="_blank" rel="noopener">'+esc(r.n)+'</a><p>'+esc(r.d)+'</p>'+
+ '<span class="mono tag">'+nm(T,r.t)+'</span><span class="mono">'+r.l.map(function(k){return nm(L,k)}).join(", ")+'</span></div><a class="go" href="'+r.u+'" target="_blank" rel="noopener">Open ↗</a></li>';
+}
+function progress(){
+ var s=stat(D);
+ return '<section class="crumb"><h1>My <em>progress</em></h1><p class="mono">'+s.d+' of '+s.n+' resources done · saved on this device only</p>'+bar(s.p)+'</section>'+
+ '<section class="sec"><h2 style="font-size:1.5rem">By level</h2><div class="pp">'+L.map(function(l){var x=stat(D.filter(function(r){return r.l.indexOf(l[0])>-1}));return'<div><b>'+l[1]+'</b><p class="mono">'+x.d+'/'+x.n+'</p>'+bar(x.p)+'</div>'}).join("")+'</div></section>'+
+ '<section class="sec"><h2 style="font-size:1.5rem">By topic</h2><div class="pp">'+T.map(function(t){var x=stat(D.filter(function(r){return r.t===t[0]}));return'<div><b>'+t[1]+'</b><p class="mono">'+x.d+'/'+x.n+'</p>'+bar(x.p)+'</div>'}).join("")+'</div></section>'+
+ '<section class="sec"><h2 style="font-size:1.5rem">Back up or move your progress</h2><p>Copy this code to keep it safe. Paste a code below to restore it on another device or browser.</p>'+
+ '<textarea id="code" aria-label="Progress backup code" readonly>'+backup()+'</textarea><div class="acts" style="margin:12px 0"><button class="btn" id="copy">Copy my code</button></div>'+
+ '<textarea id="paste" placeholder="Paste a code here" aria-label="Paste a progress code"></textarea><div class="acts" style="margin-top:12px"><button class="btn o" id="load">Restore progress</button><button class="btn o" id="reset">Reset everything</button></div><p class="mono" id="msg" aria-live="polite"></p></section>';
+}
+function backup(){return btoa(JSON.stringify(Object.keys(done).filter(function(k){return done[k]})))}
+function route(){
+ var h=location.hash.replace(/^#\/?/,"").split("/"),k=h[0]||"home",html;
+  try{
+  if(k==="level"||k==="topic"){html=list(k,h[1])}
+  else if(k==="explore")html=explore();
+  else if(k==="progress")html=progress();
+  else if(k==="how"){html=home()}
+  else html=home();
+ }catch(e){html=explore();k="explore"}
+ app.innerHTML=html;
+ Array.prototype.forEach.call(document.querySelectorAll("#tabs a"),function(a){var m=(a.dataset.k===k)||(a.dataset.k==="explore"&&(k==="level"||k==="topic"));m?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
+ if(k!=="how")window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",function(){second="all";if(location.hash==="#how"){document.getElementById("how")&&document.getElementById("how").scrollIntoView();return}route()});
+app.addEventListener("click",function(e){
+ var c=e.target.closest(".chk"),f=e.target.closest(".chip"),t=e.target;
+ if(c){done[c.dataset.id]=!done[c.dataset.id];save();var y=window.scrollY;route();window.scrollTo(0,y)}
+ else if(f){second=f.dataset.f;var y2=window.scrollY;route();window.scrollTo(0,y2)}
+ else if(t.id==="copy"){var m=document.getElementById("msg");try{navigator.clipboard.writeText(document.getElementById("code").value);m.textContent="Code copied."}catch(x){document.getElementById("code").select();m.textContent="Press Ctrl+C to copy."}}
+ else if(t.id==="load"){var m2=document.getElementById("msg");try{var a=JSON.parse(atob(document.getElementById("paste").value.trim()));a.forEach(function(k){done[k]=true});save();route();document.getElementById("msg").textContent="Progress restored."}catch(x){m2.textContent="That code didn’t work. Copy the full code and try again."}}
+ else if(t.id==="reset"){if(confirm("Reset all your progress on this device?")){done={};save();route()}}
 });
-chips();render();
+route();
 </script>
 </body>
 </html>
