@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#faf9f6;--card:#fff;--ink:#1c2420;--mute:#5d6a63;--line:#e4e2da;--g:#2b5942;--gl:#e3eee7}
+:root{--bg:#faf9f6;--card:#fff;--ink:#1c2420;--mute:#5d6a63;--line:#e4e2da;--g:#2b5942;--gl:#e3eee7;--w:#b4561f}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif}
 a{color:inherit}:focus-visible{outline:3px solid var(--g);outline-offset:2px}
@@ -20,22 +20,22 @@ header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba
 .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
 .logo{display:flex;gap:10px;align-items:center;font-weight:800;text-decoration:none}
 .logo b{width:30px;height:30px;border-radius:8px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:.9rem}
-.tabs{display:flex;gap:4px}.tabs a{padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--mute);font-weight:500;font-size:.95rem}
+.tabs{display:flex;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none;white-space:nowrap}.tabs a{padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--mute);font-weight:500;font-size:.95rem}
 .tabs a[aria-current]{background:#ecebe4;color:var(--ink)}
 .btn{display:inline-block;padding:12px 20px;border-radius:10px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;border:1px solid var(--ink);cursor:pointer;font:600 .95rem inherit;font-family:inherit}
 .btn.o{background:var(--card);color:var(--ink);border-color:var(--line)}
-.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;padding:64px 0 40px}
-.hero h1{font-size:clamp(2.6rem,6.4vw,4.6rem)}
-.hero p.lead{font-size:1.15rem;color:var(--mute);max-width:46ch;margin:20px 0 28px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 68px);padding:48px 0 32px}
+.hero h1{font-size:clamp(3rem,8vw,6.3rem)}.hero .btn{padding:16px 26px;font-size:1.05rem}
+.hero p.lead{font-size:1.3rem;color:var(--mute);max-width:44ch;margin:24px 0 32px}
 .pill{display:inline-block;background:var(--gl);color:var(--g);border-radius:999px;padding:4px 12px;margin-bottom:18px}
 .acts{display:flex;gap:12px;flex-wrap:wrap}
-.tilt{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;transform:rotate(2.2deg);box-shadow:0 30px 60px -30px rgba(28,36,32,.25)}
+.tilt{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;transform:perspective(900px) rotate(2.2deg) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;box-shadow:0 30px 60px -30px rgba(28,36,32,.25)}
 .bar{height:8px;border-radius:9px;background:#ecebe4;overflow:hidden}.bar i{display:block;height:100%;background:var(--g);width:0;transition:width .4s}
 .tilt h3{font-size:1.5rem;margin:6px 0 14px}
 .mini{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:.95rem}
 .dot{width:20px;height:20px;border-radius:50%;border:2px solid #c9c7bd;flex:none}.dot.on{background:var(--g);border-color:var(--g)}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 0 56px;border-top:1px solid var(--line)}
-.facts b{display:block;font-size:2.3rem;letter-spacing:-.04em}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:36px 0 64px;border-top:1px solid var(--line)}
+.facts b{display:block;font-size:3.2rem;letter-spacing:-.04em}
 .facts p{margin:4px 0 0;color:var(--mute);font-size:.92rem}
 .sec{padding:36px 0}.sec h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:6px}.sec>p{color:var(--mute);margin:0 0 22px}
 .g{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
@@ -58,16 +58,60 @@ ul.rows{list-style:none;margin:0;padding:0 0 50px;display:grid;gap:10px}
 .pp div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
 textarea{width:100%;min-height:80px;border:1px solid var(--line);border-radius:12px;padding:12px;font:.8rem "JetBrains Mono",monospace;background:var(--card);color:var(--ink)}
 footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mute);font-size:.88rem}
-@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:36px}.tilt{transform:none}.facts{grid-template-columns:1fr}.tabs a{padding:8px 9px}.nav .btn{display:none}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+#bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+.hero>div:first-child>*{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hero>div:first-child>:nth-child(2){animation-delay:.08s}.hero>div:first-child>:nth-child(3){animation-delay:.16s}.hero>div:first-child>:nth-child(4){animation-delay:.24s}.hero>div:first-child>:nth-child(5){animation-delay:.32s}
+.tilt{animation:up 1s .3s cubic-bezier(.2,.7,.2,1) both}
+.rv{opacity:0;transform:translateY(26px)}
+.rv.in{opacity:1;transform:none;transition:opacity .7s var(--d,0s),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.btn{transition:transform .15s,box-shadow .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px rgba(28,36,32,.4)}.btn:active{transform:scale(.97)}
+.row{transition:transform .2s,border-color .2s}.row:hover{transform:translateX(4px);border-color:var(--g)}
+.chip{transition:background .2s,color .2s}
+.calc{max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:50px}
+.calc .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.calc .ce{min-height:1.2em;text-align:right;overflow:hidden}
+#ci{width:100%;border:0;background:none;color:var(--ink);font:500 1.5rem "JetBrains Mono",monospace;text-align:right;padding:14px 4px 2px;outline:none}
+.cr{min-height:2.2rem;text-align:right;font:500 1.1rem "JetBrains Mono",monospace;color:var(--g);padding:0 4px 10px}.cr.er{color:#a32}
+.ck{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.k{padding:13px 0;border-radius:12px;border:1px solid var(--line);background:#f6f5ef;color:var(--ink);font:600 .95rem "Plus Jakarta Sans",sans-serif;cursor:pointer;transition:transform .12s,background .2s}
+.k:hover{background:#ecebe4}.k:active{transform:scale(.93)}.k.op{background:var(--gl);color:var(--g)}.k.eq{background:var(--ink);color:#fff}
+.bar.w i{background:var(--w)}
+.br{display:grid;grid-template-columns:128px 1fr 40px;gap:10px;align-items:center;padding:6px 0;font-size:.88rem}.br b{text-align:right}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.pan h3{font-size:1.1rem;margin-bottom:8px}
+.sg{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.stat b{display:block;font-size:2.4rem;letter-spacing:-.04em;color:var(--w)}.stat p{margin:4px 0 8px;font-size:.92rem}
+.nw{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--g);border-radius:14px;padding:18px;display:grid;gap:6px}
+.nw h3{font-size:1.2rem}.nw p{margin:0;color:var(--mute);font-size:.95rem}
+.sb{width:100%;padding:14px 20px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.note{color:var(--mute);font-size:.92rem;max-width:70ch}
+.ann{display:block;text-align:center;background:var(--ink);color:#fff;padding:9px 14px;text-decoration:none;font-size:.78rem;border-radius:999px;margin:14px 0 0}.ann:hover{background:var(--g)}
+.tk{overflow:hidden;border-block:1px solid var(--line);background:var(--card);margin:0 -20px;padding:13px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tkin{display:flex;gap:48px;width:max-content;animation:tk 70s linear infinite}.tkin span{white-space:nowrap;font:500 .85rem "JetBrains Mono",monospace;color:var(--mute)}.tkin b{color:var(--g)}
+@keyframes tk{to{transform:translateX(-50%)}}
+.src{display:flex;gap:8px 26px;flex-wrap:wrap;align-items:center;padding:22px 0 8px}.src span{font-weight:800;letter-spacing:-.02em;color:#8a948e;font-size:1.05rem}
+.band{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden}.band div{padding:26px 20px;border-right:1px solid var(--line)}.band div:last-child{border:0}.band b{display:block;font-size:2.8rem;letter-spacing:-.04em}.band p{margin:2px 0 0;color:var(--mute);font-size:.9rem}
+.mx{display:grid;grid-template-columns:170px repeat(5,1fr);gap:4px;min-width:620px;font-size:.9rem}.mx .h{font:500 .74rem "JetBrains Mono",monospace;color:var(--mute);padding:6px}.mx a{display:grid;place-items:center;border-radius:8px;padding:13px 0;text-decoration:none;font-weight:700;transition:transform .15s}.mx a:hover{transform:scale(1.06)}
+.fb{background:var(--ink);color:#fff;border-radius:22px;padding:48px;margin:20px 0 40px}.fb h2{font-size:clamp(1.8rem,4vw,2.8rem)}.fb p{max-width:55ch;opacity:.8}.fb .btn{background:#fff;color:var(--ink);border-color:#fff}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}.ft h4{margin:0 0 10px;font:500 .78rem "JetBrains Mono",monospace;color:var(--ink)}.ft a{display:block;text-decoration:none;padding:2px 0}.ft a:hover{color:var(--g)}
+.oa{display:inline-block;background:var(--gl);color:var(--g);border-radius:999px;padding:2px 10px;margin-left:8px}
+@media(max-width:800px){.band{grid-template-columns:1fr 1fr}.ft{grid-template-columns:1fr 1fr}.fb{padding:28px}}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:36px}.tilt{transform:none}.facts{grid-template-columns:1fr 1fr}.hero{min-height:0}.vs{grid-template-columns:1fr}.tabs a{padding:8px 9px}.nav .btn{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<canvas id="bg" aria-hidden="true"></canvas>
 <header><div class="w nav"><a class="logo" href="#/"><b>O</b>OpenShelf</a>
-<nav class="tabs" id="tabs"><a href="#/" data-k="home">Home</a><a href="#/explore" data-k="explore">Explore</a><a href="#/progress" data-k="progress">My progress</a></nav>
+<nav class="tabs" id="tabs"><a href="#/" data-k="home">Home</a><a href="#/explore" data-k="explore">Explore</a><a href="#/divide" data-k="divide">The divide</a><a href="#/research" data-k="research">Research</a><a href="#/calculator" data-k="calculator">Calculator</a><a href="#/progress" data-k="progress">My progress</a></nav>
 <a class="btn" href="#/explore">Start learning</a></div></header>
 <main class="w" id="app"></main>
-<footer><div class="w">OpenShelf supports UN Sustainable Development Goals 4 (quality education) and 10 (reduced inequalities). Resources belong to their creators; check each site for its terms. Sources: ITU Facts and Figures 2025; UNESCO GEM Report 2026; UTSA OER survey 2024–25.</div></footer>
+<footer><div class="w"><div class="ft"><div><b style="color:var(--ink)">OpenShelf</b><p style="margin:8px 0 0;max-width:38ch">A free library of learning resources sorted by level and topic, built to support UN Sustainable Development Goals 4 and 10. Resources belong to their creators; check each site for its terms.</p></div>
+<div><h4>LIBRARY</h4><a href="#/explore">Explore</a><a href="#/level/hs">High school</a><a href="#/level/ug">Undergraduate</a><a href="#/calculator">Calculator</a></div>
+<div><h4>EVIDENCE</h4><a href="#/divide">The divide</a><a href="#/research">Research library</a><a href="#/progress">My progress</a></div>
+<div><h4>DATA SOURCES</h4><span>World Bank, OECD PISA 2025, UNESCO, UNICEF, ITU</span></div></div></div></footer>
 <script>
 var L=[["jh","Junior high"],["hs","High school"],["ug","Undergraduate"],["ms","Master’s"],["phd","PhD"]];
 var T=[["math","Mathematics"],["physics","Physics"],["chem","Chemistry"],["tech","Tech & programming"],["mind","Body & mind"],["money","Money & business"],["world","World & society"],["media","Media & digital literacy"]];
@@ -128,30 +172,98 @@ function save(){try{localStorage.setItem("os_done",JSON.stringify(done))}catch(e
 function nm(a,k){return a.filter(function(x){return x[0]===k})[0][1]}
 function esc(s){return s.replace(/[&<>"]/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]})}
 function stat(list){var d=list.filter(function(r){return done[r.id]}).length;return{d:d,n:list.length,p:list.length?Math.round(d/list.length*100):0}}
-function bar(p){return '<div class="bar"><i style="width:'+p+'%"></i></div>'}
+function bar(p){return '<div class="bar"><i data-w="'+p+'"></i></div>'}
 var app=document.getElementById("app"),second="all";
 
+var LP=[["Central Sahel",94],["Sub-Saharan Africa",89],["Low & middle income",70]];
+var NEWSLETTER=""; // Optional: paste a Google Form or Formspree link here to show a "Get updates" button
+function lpBars(){return LP.map(function(r){return '<div class="br"><span>'+r[0]+'</span><div class="bar w"><i data-w="'+r[1]+'"></i></div><b>'+r[1]+'%</b></div>'}).join("")}
+var REPO="https://github.com/YOUR-USERNAME/YOUR-REPO"; // EDIT: your GitHub repo URL, used by the feedback buttons
+function fbUrl(){return REPO+"/issues/new?title="+encodeURIComponent("Feedback: ")+"&body="+encodeURIComponent("What should we fix or add?\n\nLink (if a resource):\n")}
+function fbBand(){return '<section class="fb"><span class="mono" style="color:#9fb8a8">FEEDBACK</span><h2 style="margin:8px 0 12px">Help us make it <em style="color:#9fd1b3">better.</em></h2><p>Found a broken link, a resource at the wrong level, or something we should add? Send a note and we will review it.</p><a class="btn" href="'+fbUrl()+'" target="_blank" rel="noopener">Send feedback →</a></section>'}
+function matrix(){
+ var sh=["Jr high","High sch.","Undergrad","Master’s","PhD"],h='<div class="mx"><div class="h"></div>'+L.map(function(l,i){return'<div class="h" style="text-align:center">'+sh[i]+'</div>'}).join("");
+ T.forEach(function(t){h+='<div class="h" style="align-self:center">'+t[1]+'</div>';L.forEach(function(l){var n=D.filter(function(r){return r.t===t[0]&&r.l.indexOf(l[0])>-1}).length;h+='<a href="#/level/'+l[0]+'" style="background:rgba(43,89,66,'+(n?Math.min(.12+n*.15,.9):.05)+');color:'+(n>4?"#fff":"var(--ink)")+'" aria-label="'+t[1]+', '+l[1]+': '+n+' resources">'+(n||"–")+'</a>'})});
+ return '<div style="overflow-x:auto">'+h+'</div></div>';
+}
+var TK=["<b>70%</b> of 10-year-olds in low and middle income countries can’t read a simple text · World Bank","<b>273M</b> children and youth out of school, up for the 7th year · UNESCO 2026","<b>44M</b> more teachers needed by 2030 · UNESCO","<b>2.2B</b> people still offline · ITU 2025","<b>−9 / −14</b> OECD maths and reading points since 2022 · PISA 2025","<b>6M</b> more children could leave school by end-2026 after aid cuts · UNICEF","<b>94%</b> of 10-year-olds in the Central Sahel can’t read a simple text · World Bank 2025"];
 function home(){
- var s=stat(D),nxt=D.filter(function(r){return!done[r.id]}).slice(0,3);
- return '<section class="hero"><div><span class="pill mono">Free resources · No account · Works offline-first</span>'+
- '<h1>Learning belongs on an <em>open shelf.</em></h1><p class="lead">OpenShelf collects free courses, simulations and guides from junior high to PhD, so you can find the right one without searching the whole internet.</p>'+
- '<div class="acts"><a class="btn" href="#/explore">Explore the library →</a><a class="btn o" href="#how">See how it works</a></div>'+
+ var s=stat(D),tk=TK.concat(TK).map(function(t){return'<span>'+t+'</span>'}).join("");
+ return '<a class="ann mono" href="#/research">NEW · PISA 2025 is out: maths and reading hit record lows. Read the evidence →</a>'+
+ '<section class="hero"><div><span class="pill mono">OPEN LEARNING LIBRARY · SDG 4 &amp; 10</span>'+
+ '<h1>Same age. <em>Unequal chances.</em></h1><p class="lead">Seven in ten 10-year-olds in low and middle income countries can’t read a simple text. OpenShelf puts free learning in one place, so anyone can start.</p>'+
+ '<div class="acts"><a class="btn" href="#/explore">Open the library →</a><a class="btn o" href="#/research">Read the evidence</a></div>'+
  '<p class="mono" style="margin-top:18px">No account. No cloud. Your progress stays in this browser.</p></div>'+
- '<div class="tilt"><div class="mono">Your progress</div><h3>'+s.p+'% of the shelf done</h3>'+bar(s.p)+
- '<div style="margin-top:14px">'+nxt.map(function(r){return'<div class="mini"><span class="dot"></span>'+esc(r.n)+'</div>'}).join("")+'</div></div></section>'+
- '<section class="facts"><div><b>2.2 billion</b><p>people were still offline in 2025, mostly in low and middle income countries (ITU).</p></div>'+
- '<div><b>273 million</b><p>children and young people were out of school in 2024 (UNESCO).</p></div>'+
- '<div><b>85%</b><p>of surveyed students at one US university had never heard of open educational resources (UTSA).</p></div></section>'+
+ '<div class="tilt"><div class="mono">Reading at age 10 · World Bank</div><h3>Who can read, and who can’t.</h3>'+lpBars()+
+ '<p class="mono" style="margin:14px 0 0">Share of 10-year-olds who can’t read and understand a simple text.</p><p class="mono" style="margin:6px 0 0">Your progress on the shelf: '+s.p+'%</p></div></section>'+
+ '<div class="tk" aria-label="Key global education statistics"><div class="tkin">'+tk+'</div></div>'+
+ '<div class="src mono"><span style="font:500 .75rem JetBrains Mono,monospace">DATA FROM</span><span>World Bank</span><span>UNESCO</span><span>OECD PISA</span><span>UNICEF</span><span>ITU</span></div>'+
+ '<section class="sec"><div class="band"><div><b data-n="'+D.length+'" data-s="">'+D.length+'</b><p>curated free resources</p></div><div><b data-n="'+L.length+'" data-s="">'+L.length+'</b><p>education levels, junior high to PhD</p></div><div><b data-n="'+T.length+'" data-s="">'+T.length+'</b><p>subject areas</p></div><div><b data-n="0" data-s="">0</b><p>accounts needed</p></div><div><b>$0</b><p>cost to use</p></div></div></section>'+
+ '<section class="sec"><h2>Our <em>mission</em></h2><p>Make good free learning easy to find, and show the evidence for why it matters.</p><div class="g">'+
+ '<div class="tile"><span class="mono">01</span><h3>Curate</h3><span>One shelf of free resources sorted by level and topic, so finding the right course takes minutes.</span></div>'+
+ '<div class="tile"><span class="mono">02</span><h3>Measure</h3><span>Progress tracking that lives in your own browser. We have no accounts and no database.</span></div>'+
+ '<div class="tile"><span class="mono">03</span><h3>Open</h3><span>Free to use, with sources cited and room for anyone to suggest corrections.</span></div></div></section>'+
+ '<section class="sec"><h2>Coverage <em>matrix</em></h2><p>How many resources sit at each level and topic. Empty cells are gaps we are still filling.</p>'+matrix()+'</section>'+
+ '<section class="sec"><h2>How we <em>choose</em></h2><div class="g"><div class="tile"><h3>Free to start</h3><span>You should not have to pay to begin.</span></div><div class="tile"><h3>Reputable</h3><span>Universities, public institutions and well-known open projects.</span></div><div class="tile"><h3>Level-labelled</h3><span>Every resource is tagged by level and topic.</span></div><div class="tile"><h3>Honest about gaps</h3><span>The matrix above shows what is still missing.</span></div></div></section>'+
+ '<section class="sec"><h2>The <em>evidence</em></h2><p>Open reports and research behind the project.</p><div class="g" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">'+RES.slice(0,3).map(resCard).join("")+'</div><p style="margin-top:16px"><a class="btn o" href="#/research">Open the research library →</a></p></section>'+
+ '<section class="sec"><h2>Who it’s <em>for</em></h2><div class="g"><div class="tile"><h3>Students</h3><span>Find what to study next at your level.</span></div><div class="tile"><h3>Teachers</h3><span>Point learners to free, trusted material.</span></div><div class="tile"><h3>Self-learners</h3><span>Start from zero, with no account.</span></div></div></section>'+
  '<section class="sec" id="how"><h2>How it <em>works</em></h2><p>Three steps, no sign-up.</p><div class="g">'+
  '<div class="tile"><h3>1. Pick a level</h3><span>Junior high, high school, undergraduate, master’s or PhD.</span></div>'+
  '<div class="tile"><h3>2. Choose a resource</h3><span>Every resource is free to start and sorted by topic.</span></div>'+
- '<div class="tile"><h3>3. Tick it off</h3><span>Progress saves in your browser. Back it up with a code to use on another device.</span></div></div></section>';
+ '<div class="tile"><h3>3. Tick it off</h3><span>Progress saves in your browser. Back it up with a code to use on another device.</span></div></div></section>'+fbBand();
 }
+var sq="";
+function srHtml(){var q=sq.toLowerCase().trim();if(!q)return"";var r=D.filter(function(x){return(x.n+" "+x.d+" "+nm(T,x.t)).toLowerCase().indexOf(q)>-1}).slice(0,12);return r.length?r.map(row).join(""):'<li class="mono">No match. Try another word.</li>'}
 function explore(){
- return '<section class="sec"><h2>Start with your <em>level.</em></h2><p>Studying advanced algebra? Go straight to Undergraduate and find it there.</p><div class="g">'+
+ return '<section class="sec" style="padding-bottom:0"><input class="sb" id="sq" type="search" placeholder="Search every resource…" value="'+esc(sq)+'" aria-label="Search every resource"><ul class="rows" id="sr" style="padding:14px 0 0">'+srHtml()+'</ul></section>'+
+ '<section class="sec"><h2>Start with your <em>level.</em></h2><p>Studying advanced algebra? Go straight to Undergraduate and find it there.</p><div class="g">'+
  L.map(function(l){var s=stat(D.filter(function(r){return r.l.indexOf(l[0])>-1}));return'<a class="tile" href="#/level/'+l[0]+'"><span class="mono">'+s.n+' resources</span><h3>'+l[1]+'</h3>'+bar(s.p)+'</a>'}).join("")+'</div></section>'+
  '<section class="sec"><h2>Or browse by <em>topic.</em></h2><p>See every level of one subject together.</p><div class="g">'+
  T.map(function(t){var s=stat(D.filter(function(r){return r.t===t[0]}));return'<a class="tile" href="#/topic/'+t[0]+'"><span class="mono">'+s.n+' resources</span><h3>'+t[1]+'</h3>'+bar(s.p)+'</a>'}).join("")+'</div></section>';
+}
+var PISA={
+ math:{top:[["B-S-J-Z (China)",612],["Singapore",563],["Macao (China)",549],["Chinese Taipei",546],["Japan",525],["Korea",522]],low:[["Morocco",355],["Kyrgyzstan",364],["Indonesia",364],["Ecuador",366],["Cambodia",366],["Argentina",367]]},
+ read:{top:[["Singapore",535],["B-S-J-Z (China)",527],["Chinese Taipei",508],["Japan",503],["Macao (China)",501],["Korea",501]],low:[["Cambodia",347],["Armenia",348],["Palestinian Auth.",350],["Paraguay",352],["North Macedonia",357],["Jordan",363]]},
+ sci:{top:[["B-S-J-Z (China)",597],["Singapore",560],["Macao (China)",541],["Chinese Taipei",540],["Japan",538],["Estonia",527]],low:[["Kyrgyzstan",363],["Armenia",369],["Lebanon",372],["Philippines",373],["North Macedonia",378],["Cambodia",382]]}};
+function divide(){
+ var k=second==="all"?"math":second,d=PISA[k];
+ function col(a,cls,t){return '<div class="pan"><h3>'+t+'</h3>'+a.map(function(r){return '<div class="br"><span>'+r[0]+'</span><div class="bar'+cls+'"><i data-w="'+(r[1]/6.5).toFixed(1)+'"></i></div><b>'+r[1]+'</b></div>'}).join("")+'</div>'}
+ var ST=[["273M","children and young people are out of school, rising for the seventh year in a row.","UNESCO, 2026"],
+ ["44M","more teachers are needed by 2030. Sub-Saharan Africa must nearly double its teaching force, from 8M to 15M.","UNESCO Teacher Task Force"],
+ ["$70B","a year is the education funding gap in sub-Saharan Africa, the largest of any region.","UNESCO GEM Report"],
+ ["85","points separate advantaged and disadvantaged students in science across OECD countries.","OECD, PISA 2025"],
+ ["6M","more children could be out of school by the end of 2026 because of aid cuts.","UNICEF, 2025"],
+ ["2.2B","people are still offline, which locks them out of free online learning.","ITU, 2025"]];
+ return '<section class="crumb"><h1>The learning <em>divide</em></h1><p class="note" style="margin-top:12px">Where you are born still decides how much you learn. These are the latest comparable numbers on learning quality and access, with sources.</p></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">Reading at age 10</h2><p>Share of 10-year-olds who can’t read and understand a simple text.</p><div class="pan" style="max-width:640px">'+lpBars()+'<p class="mono" style="margin:10px 0 0">World Bank and UNESCO. Central Sahel figure from a 2025 World Bank release.</p></div></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">PISA 2025: how 15-year-olds score</h2><p>Mean scores out of a full 0 to 650 scale. The gap in '+({math:"mathematics",read:"reading",sci:"science"})[k]+' between the top and bottom of the table is '+(d.top[0][1]-d.low[0][1])+' points.</p>'+
+ '<div class="chips" role="group" aria-label="Subject">'+[["math","Mathematics"],["read","Reading"],["sci","Science"]].map(function(o){return'<button class="chip" data-f="'+o[0]+'" aria-pressed="'+(k===o[0])+'">'+o[1]+'</button>'}).join("")+'</div>'+
+ '<div class="vs">'+col(d.top,"","Highest scores")+col(d.low," w","Lowest scores")+'</div></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">Behind the numbers</h2><div class="sg">'+ST.map(function(x){return'<div class="pan stat"><b>'+x[0]+'</b><p>'+x[1]+'</p><span class="mono">'+x[2]+'</span></div>'}).join("")+'</div></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">Read this before you quote it</h2>'+
+ '<p class="note">There is no single official "education quality index". This page uses the best comparable measures: PISA for 15-year-olds in 91 participating systems, and learning poverty for younger children. PISA only covers students in school and many of the poorest countries do not take part, so the true gap is likely wider than the chart shows. The OECD also notes that the socio-economic gap narrowed between 2022 and 2025 mainly because advantaged students scored lower, not because disadvantaged students improved. Chinese Taipei is the OECD’s name for Taiwan. B-S-J-Z is Beijing, Shanghai, Jiangsu and Zhejiang.</p>'+
+ '<p class="note"><a href="https://www.oecd.org/en/publications/2026/09/pisa-2025-results-volume-i_5265bfb1/" target="_blank" rel="noopener">OECD PISA 2025</a> · <a href="https://www.worldbank.org/en/topic/education/brief/what-is-learning-poverty" target="_blank" rel="noopener">World Bank learning poverty</a> · <a href="https://www.teachertaskforce.org" target="_blank" rel="noopener">UNESCO Teacher Task Force</a></p></section>';
+}
+var NEWS=[
+["8 Sep 2026","PISA 2025: maths and reading hit record lows","Across OECD countries maths fell 9 points and reading 14 points since 2022. Scores were already slipping before 2020, and more screen time and less reading for pleasure go with weaker results.","OECD","https://www.oecd.org/en/publications/2026/09/pisa-2025-results-volume-i_5265bfb1/"],
+["6 Oct 2026","The world needs 50 million more teachers by 2030","UNESCO and partners say 44 million are needed for universal primary and secondary schooling, with more needed for pre-primary.","Africanews / AP","https://www.africanews.com/amp/2026/10/06/world-needs-50-million-additional-teachers-by-2030-unesco-says/"],
+["2026","AI supports learning only when it is guided","The OECD Digital Education Outlook finds generative AI can help when built on clear teaching principles. Without them it lifts task results but not real learning.","OECD","https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html"],
+["Mar 2026","273 million children and youth are out of school","UNESCO’s 2026 monitoring report shows the out-of-school population rising for a seventh straight year.","UN News","https://news.un.org/en/story/2026/03/1167200"],
+["Sep 2025","Aid cuts could push 6 million more children out of school","UNICEF warned that falling education funding could add 6 million out-of-school children by the end of 2026.","UNICEF","https://www.unicef.org/press-releases/global-funding-cuts-could-force-6-million-more-children-out-school-coming-year"]];
+var FOLLOW=[["UNESCO Global Education Monitoring Report","https://www.unesco.org/gem-report"],["UNESCO Institute for Statistics data","https://data.uis.unesco.org"],["World Bank: Education","https://www.worldbank.org/en/topic/education"],["Our World in Data: Education","https://ourworldindata.org/education"]];
+var RES=[
+["Open access","Are OER and open practices effective in improving learning achievement?","Meta-analysis, 2023, Int. J. of Educational Technology in Higher Education","A meta-analysis of 25 studies with about 120,000 participants. The effect varies by subject, level of education and region.","https://doi.org/10.1186/s41239-023-00424-3"],
+["Open access","Efficacy of open textbook adoption on learning performance and course withdrawal","Clinton and Khan, 2019, AERA Open","A meta-analysis of postsecondary studies that found no difference in learning efficacy between open and commercial textbooks.","https://commons.und.edu/ehb-fac/42"],
+["Open access","Open educational resources and college textbook choices","Hilton III, 2016, Educational Technology Research and Development","A review of research on efficacy and perceptions, including nine studies on learning outcomes covering 46,149 students.","https://doi.org/10.1007/s11423-016-9434-9"],
+["Open access","The multi-year impact of Canada’s first Zero Textbook Cost initiative","Jhangiani, Pakkal and Xia, 2025, Open Praxis","Finds that moving to free open resources did not come at the expense of student outcomes.","https://files.eric.ed.gov/fulltext/EJ1481168.pdf"],
+["Open report","2023 Cost-Effective Approaches to Improve Global Learning (“Smart Buys”)","Global Education Evidence Advisory Panel, World Bank and partners","Ranks what works for learning in low and middle income countries. Supporting teachers and teaching at the right level rank highly, while buying hardware without other changes is a poor buy.","https://www.worldbank.org/en/topic/teachingandlearning/publication/cost-effective-approaches-to-improve-global-learning"],
+["Open report","What is learning poverty?","World Bank and UNESCO Institute for Statistics","Defines the measure used on this site: being unable to read and understand a simple text by age 10.","https://www.worldbank.org/en/topic/education/brief/what-is-learning-poverty"]];
+function resCard(r){return '<article class="nw"><span class="mono">'+r[2]+'<span class="oa">'+r[0]+'</span></span><h3>'+r[1]+'</h3><p>'+r[3]+'</p><a style="font-weight:600;color:var(--g)" href="'+r[4]+'" target="_blank" rel="noopener">Read it free ↗</a></article>'}
+function research(){
+ return '<section class="crumb"><h1>Research <em>library</em></h1><p class="note" style="margin-top:12px">Reports and studies you can read free online, with links to the original sources. Checked November 2026.</p></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">Open research on free learning resources</h2><p>What the evidence says about open educational resources and what works for learning.</p><div class="g" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">'+RES.map(resCard).join("")+'</div></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">Recent reports</h2><div class="g" style="grid-template-columns:1fr">'+NEWS.map(function(n){return'<article class="nw"><span class="mono">'+n[0]+' · '+n[3]+'</span><h3>'+n[1]+'</h3><p>'+n[2]+'</p><a style="font-weight:600;color:var(--g)" href="'+n[4]+'" target="_blank" rel="noopener">Read the source ↗</a></article>'}).join("")+'</div></section>'+
+ '<section class="sec"><h2 style="font-size:1.6rem">Data portals</h2><p>Open datasets and publishers to follow for new releases. Upcoming: PISA English-as-a-foreign-language results (April 2027) and the digital-world report (May 2027).</p><div class="pp">'+FOLLOW.map(function(f){return'<div><a class="t" style="font-weight:700" href="'+f[1]+'" target="_blank" rel="noopener">'+f[0]+' ↗</a></div>'}).join("")+'</div></section>'+fbBand();
 }
 function list(kind,key){
  var base=D.filter(function(r){return kind==="level"?r.l.indexOf(key)>-1:r.t===key}),other=kind==="level"?T:L,list=base;
@@ -176,28 +288,106 @@ function progress(){
  '<textarea id="paste" placeholder="Paste a code here" aria-label="Paste a progress code"></textarea><div class="acts" style="margin-top:12px"><button class="btn o" id="load">Restore progress</button><button class="btn o" id="reset">Reset everything</button></div><p class="mono" id="msg" aria-live="polite"></p></section>';
 }
 function backup(){return btoa(JSON.stringify(Object.keys(done).filter(function(k){return done[k]})))}
-function route(){
+function route(keep){
  var h=location.hash.replace(/^#\/?/,"").split("/"),k=h[0]||"home",html;
   try{
   if(k==="level"||k==="topic"){html=list(k,h[1])}
   else if(k==="explore")html=explore();
   else if(k==="progress")html=progress();
+  else if(k==="calculator")html=calcView();
+  else if(k==="divide")html=divide();
+  else if(k==="research")html=research();
   else if(k==="how"){html=home()}
   else html=home();
  }catch(e){html=explore();k="explore"}
- app.innerHTML=html;
+ app.innerHTML=html;post(keep);
  Array.prototype.forEach.call(document.querySelectorAll("#tabs a"),function(a){var m=(a.dataset.k===k)||(a.dataset.k==="explore"&&(k==="level"||k==="topic"));m?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
- if(k!=="how")window.scrollTo(0,0);
+ if(k!=="how"&&!keep)window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",function(){second="all";if(location.hash==="#how"){document.getElementById("how")&&document.getElementById("how").scrollIntoView();return}route()});
 app.addEventListener("click",function(e){
  var c=e.target.closest(".chk"),f=e.target.closest(".chip"),t=e.target;
- if(c){done[c.dataset.id]=!done[c.dataset.id];save();var y=window.scrollY;route();window.scrollTo(0,y)}
- else if(f){second=f.dataset.f;var y2=window.scrollY;route();window.scrollTo(0,y2)}
+ if(c){done[c.dataset.id]=!done[c.dataset.id];save();route(true)}
+ else if(f){second=f.dataset.f;route(true)}
+ else if(t.closest(".k")){key(t.closest(".k").dataset.k)}
  else if(t.id==="copy"){var m=document.getElementById("msg");try{navigator.clipboard.writeText(document.getElementById("code").value);m.textContent="Code copied."}catch(x){document.getElementById("code").select();m.textContent="Press Ctrl+C to copy."}}
  else if(t.id==="load"){var m2=document.getElementById("msg");try{var a=JSON.parse(atob(document.getElementById("paste").value.trim()));a.forEach(function(k){done[k]=true});save();route();document.getElementById("msg").textContent="Progress restored."}catch(x){m2.textContent="That code didn’t work. Copy the full code and try again."}}
  else if(t.id==="reset"){if(confirm("Reset all your progress on this device?")){done={};save();route()}}
 });
+
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches,ANS=0,deg=true;
+function q(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function post(keep){
+ var rm=keep||RM;
+ if(rm)q(".bar i").forEach(function(i){i.style.transition="none";i.style.width=i.dataset.w+"%"});
+ else requestAnimationFrame(function(){requestAnimationFrame(function(){q(".bar i").forEach(function(i){i.style.width=i.dataset.w+"%"})})});
+ if(!rm&&"IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;el.classList.add("in");io.unobserve(el);setTimeout(function(){el.classList.remove("rv","in")},1300)}})},{threshold:.1});
+  q(".tile,.row,.facts>div,.pp>div,.sec>h2,.sec>p,.calc,.pan,.stat,.nw").forEach(function(el,n){el.classList.add("rv");el.style.setProperty("--d",(n%6)*.06+"s");io.observe(el)});
+ }
+ if(!rm)q("[data-n]").forEach(function(b){var n=parseFloat(b.dataset.n),sf=b.dataset.s,d=b.dataset.n.indexOf(".")>-1?1:0,t0=null;(function f(t){if(t0===null)t0=t;var p=Math.min((t-t0)/1300,1);b.textContent=(n*(1-Math.pow(1-p,3))).toFixed(d)+sf;if(p<1)requestAnimationFrame(f)})(performance.now())});
+ var ci=document.getElementById("ci");if(ci&&!keep)ci.focus({preventScroll:true});
+}
+function calc(s){
+ s=s.replace(/÷/g,"/").replace(/×/g,"*").replace(/−/g,"-").replace(/π/g,"pi").replace(/√/g,"sqrt").toLowerCase().trim();
+ var re=/\s*(\d+\.?\d*|\.\d+|[a-z]+|[-+*\/^!%()])/y,m,t=[],i=0,p=0,PI=Math.PI;
+ while(i<s.length){re.lastIndex=i;m=re.exec(s);if(!m)throw 0;t.push(m[1]);i=re.lastIndex}
+ var A=function(x){return deg?x*PI/180:x},B=function(x){return deg?x*180/PI:x};
+ var F={sin:function(x){return Math.sin(A(x))},cos:function(x){return Math.cos(A(x))},tan:function(x){return Math.tan(A(x))},asin:function(x){return B(Math.asin(x))},acos:function(x){return B(Math.acos(x))},atan:function(x){return B(Math.atan(x))},ln:Math.log,log:Math.log10,sqrt:Math.sqrt,abs:Math.abs,exp:Math.exp};
+ function pk(){return t[p]}
+ function fa(n){if(n<0||n%1||n>170)throw 0;var r=1;for(var j=2;j<=n;j++)r*=j;return r}
+ function ex(){var v=tm();while(pk()==="+"||pk()==="-"){var o=t[p++],r=tm();v=o==="+"?v+r:v-r}return v}
+ function tm(){var v=un();for(;;){var k=pk();if(k==="*"||k==="/"){p++;var r=un();v=k==="*"?v*r:v/r}else if(k&&(/^[\d.a-z]/.test(k)||k==="(")){v*=un()}else return v}}
+ function un(){if(pk()==="-"){p++;return -un()}if(pk()==="+"){p++;return un()}var b=po();if(pk()==="^"){p++;return Math.pow(b,un())}return b}
+ function po(){var v=pr();while(pk()==="!"||pk()==="%"){v=t[p++]==="!"?fa(v):v/100}return v}
+ function pr(){var k=t[p++];if(k===undefined)throw 0;
+  if(k==="("){var v=ex();if(pk()===")")p++;return v}
+  if(/^[\d.]/.test(k))return parseFloat(k);
+  if(k==="pi")return PI;if(k==="e")return Math.E;if(k==="ans")return ANS;
+  if(F[k]){var a;if(pk()==="("){p++;a=ex();if(pk()===")")p++}else a=un();return F[k](a)}
+  throw 0}
+ var r=ex();if(p<t.length)throw 0;return r}
+function calcView(){
+ var K=[["sin(","cos(","tan(","ln(","log("],["asin(","acos(","atan(","√(","^"],["(",")","π","e","!"],["7","8","9","÷","DEL"],["4","5","6","×","AC"],["1","2","3","−","Ans"],["0",".","%","+","="]];
+ return '<section class="crumb"><h1>Scientific <em>calculator</em></h1><p class="mono">Type with your keyboard or tap the keys. Press Enter for the answer.</p></section><div class="calc"><div class="top"><button class="k op" style="padding:8px 14px" data-k="MODE" id="mode" aria-label="Switch between degrees and radians">'+(deg?"DEG":"RAD")+'</button><div class="ce mono" id="ce"></div></div><input id="ci" inputmode="none" autocomplete="off" aria-label="Expression" placeholder="0"><div class="cr" id="cr" aria-live="polite"></div><div class="ck">'+
+ K.map(function(r){return r.map(function(k){var c=k==="="?" eq":/^[0-9.]$/.test(k)?"":" op";return'<button class="k'+c+'" data-k="'+k+'">'+(k==="DEL"?"⌫":k)+'</button>'}).join("")}).join("")+'</div></div>';
+}
+function ev(f){
+ var i=document.getElementById("ci"),r=document.getElementById("cr");if(!i)return;
+ if(!i.value.trim()){r.textContent="";return}
+ try{var v=calc(i.value);if(!isFinite(v))throw 0;if(Math.abs(v)<1e-12)v=0;var o=String(parseFloat(v.toPrecision(12)));r.classList.remove("er");
+  if(f){document.getElementById("ce").textContent=i.value+" =";ANS=v;i.value=o;r.textContent=""}else r.textContent="= "+o}
+ catch(x){r.textContent=f?"Error":"";r.classList.toggle("er",!!f)}
+}
+function key(k){
+ var i=document.getElementById("ci");if(!i)return;
+ if(k==="AC"){i.value="";document.getElementById("ce").textContent="";document.getElementById("cr").textContent=""}
+ else if(k==="DEL"){var a=i.selectionStart,b=i.selectionEnd;if(a===b&&a>0)a--;i.value=i.value.slice(0,a)+i.value.slice(b);i.setSelectionRange(a,a)}
+ else if(k==="="){ev(true);return}
+ else if(k==="MODE"){deg=!deg;document.getElementById("mode").textContent=deg?"DEG":"RAD"}
+ else{var s=i.selectionStart,e=i.selectionEnd;i.value=i.value.slice(0,s)+k+i.value.slice(e);i.setSelectionRange(s+k.length,s+k.length)}
+ ev(false)
+}
+app.addEventListener("keydown",function(e){if(e.target.id==="ci"&&e.key==="Enter"){e.preventDefault();ev(true)}});
+app.addEventListener("input",function(e){if(e.target.id==="ci")ev(false);if(e.target.id==="sq"){sq=e.target.value;document.getElementById("sr").innerHTML=srHtml()}});
+// Cursor-reactive dot background
+(function(){
+ var c=document.getElementById("bg"),x=c.getContext("2d"),S=26,W,H,P=[],m={x:-999,y:-999,vx:0,vy:0};
+ function size(){var d=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";x.setTransform(d,0,0,d,0,0);P=[];for(var i=S/2;i<W+S;i+=S)for(var j=S/2;j<H+S;j+=S)P.push({hx:i,hy:j,x:i,y:j,vx:0,vy:0});if(RM)draw()}
+ function draw(){x.clearRect(0,0,W,H);for(var n=0;n<P.length;n++){var p=P[n],o=Math.min(Math.hypot(p.x-p.hx,p.y-p.hy),30);x.fillStyle="rgba(0,0,0,"+(.2+o/45)+")";x.beginPath();x.arc(p.x,p.y,1.1+o/16,0,6.283);x.fill()}}
+ function step(){
+  var R=150;m.vx*=.88;m.vy*=.88;
+  for(var n=0;n<P.length;n++){var p=P[n],dx=p.x-m.x,dy=p.y-m.y,d2=dx*dx+dy*dy;
+   if(d2<R*R){var d=Math.sqrt(d2)||1,f=1-d/R;p.vx+=dx/d*f*1.5+m.vx*f*.07;p.vy+=dy/d*f*1.5+m.vy*f*.07}
+   p.vx+=(p.hx-p.x)*.035;p.vy+=(p.hy-p.y)*.035;p.vx*=.87;p.vy*=.87;p.x+=p.vx;p.y+=p.vy}
+  draw();requestAnimationFrame(step)}
+ addEventListener("resize",size);size();
+ if(RM)return;
+ function mv(e){m.vx=e.clientX-m.x;m.vy=e.clientY-m.y;m.x=e.clientX;m.y=e.clientY;var t=document.querySelector(".tilt");if(t){t.style.setProperty("--rx",((e.clientY/H-.5)*-8)+"deg");t.style.setProperty("--ry",((e.clientX/W-.5)*8)+"deg")}}
+ addEventListener("pointermove",mv);addEventListener("pointerdown",mv);
+ document.documentElement.addEventListener("mouseleave",function(){m.x=m.y=-999});
+ requestAnimationFrame(step);
+})();
 route();
 </script>
 </body>
