@@ -178,7 +178,7 @@ var app=document.getElementById("app"),second="all";
 var LP=[["Central Sahel",94],["Sub-Saharan Africa",89],["Low & middle income",70]];
 var NEWSLETTER=""; // Optional: paste a Google Form or Formspree link here to show a "Get updates" button
 function lpBars(){return LP.map(function(r){return '<div class="br"><span>'+r[0]+'</span><div class="bar w"><i data-w="'+r[1]+'"></i></div><b>'+r[1]+'%</b></div>'}).join("")}
-var REPO="https://github.com/YOUR-USERNAME/YOUR-REPO"; // EDIT: your GitHub repo URL, used by the feedback buttons
+var REPO="https://github.com/786Lala/OpenShelf"; // EDIT: your GitHub repo URL, used by the feedback buttons
 function fbUrl(){return REPO+"/issues/new?title="+encodeURIComponent("Feedback: ")+"&body="+encodeURIComponent("What should we fix or add?\n\nLink (if a resource):\n")}
 function fbBand(){return '<section class="fb"><span class="mono" style="color:#9fb8a8">FEEDBACK</span><h2 style="margin:8px 0 12px">Help us make it <em style="color:#9fd1b3">better.</em></h2><p>Found a broken link, a resource at the wrong level, or something we should add? Send a note and we will review it.</p><a class="btn" href="'+fbUrl()+'" target="_blank" rel="noopener">Send feedback →</a></section>'}
 function matrix(){
